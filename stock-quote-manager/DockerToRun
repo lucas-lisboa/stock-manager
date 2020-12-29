@@ -1,0 +1,9 @@
+docker build -t stock/stock-manager .
+docker build -t stock/stock-quote-manager .
+
+docker network create docker-mysql
+
+docker container run --name docker-mysql --network docker-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bootdb -p 3306:3306 -p 33060:33060 -d mysql:8 
+
+docker run --name stock-manager -t --network docker-mysql -p 8080:8080 stock/stock-manager
+docker run --name stock-quote-manager -t --network docker-mysql -p 8081:8081 stock/stock-quote-manager

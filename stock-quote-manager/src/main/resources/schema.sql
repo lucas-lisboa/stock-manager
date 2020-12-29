@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS stock_quote;
+DROP TABLE IF EXISTS quotes;
+
+CREATE TABLE quotes (
+	id INT NOT NULL AUTO_INCREMENT,
+	date TIMESTAMP,
+	price DECIMAL(6,2),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE stock_quote (
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(255),
+	quotes_id INT,
+	PRIMARY KEY(id),
+	FOREIGN KEY (quotes_id) REFERENCES quotes(id)
+);
